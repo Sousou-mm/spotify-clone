@@ -5,9 +5,8 @@ import SearchInput from "@/components/SearchInput";
 import SearchContent from "./components/SearchContent";
 
 
-// @ts-ignore
+//ts-expect-error
 interface SearchProps{
-    // @ts-ignore
     searchParams: {
         title: string;
     }
