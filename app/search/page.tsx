@@ -3,10 +3,9 @@ import Header from "@/components/Header";
 import SearchInput from "@/components/SearchInput";
 
 import SearchContent from "./components/SearchContent";
-import { PageProps } from "@/.next/types/app/layout";
 
 
-interface SearchProps extends PageProps{
+interface SearchProps{
     searchParams: Promise<{
         title: string;
     }>;
