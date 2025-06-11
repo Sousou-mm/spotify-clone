@@ -62,7 +62,6 @@ const UploadModal = () => {
             const uniqueID = uniqid();
 
             //Upload song
-
             const {
                 data: songData,
                 error: songError,
@@ -82,7 +81,6 @@ const UploadModal = () => {
             }
 
             // Upload image
-
             const {
                 data: imageData,
                 error: imageError,
@@ -123,6 +121,7 @@ const UploadModal = () => {
             uploadModal.onClose();
             
         } catch (error){
+            console.error(error);
             toast.error("Something went wrong");
         } finally{
             setIsLoading(false);

@@ -30,7 +30,7 @@ export async function POST() {
         });
 
         return NextResponse.json({url}); // возвращем URL поратла клиенту
-    } catch (error: any) {
+    } catch (error) {
         console.log(error);
         return new NextResponse('Internal Error', {status: 500});
     }

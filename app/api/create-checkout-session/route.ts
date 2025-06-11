@@ -1,5 +1,5 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { headers, cookies } from "next/headers";
+import {  cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { stripe } from "@/libs/stripe";
@@ -9,7 +9,7 @@ import { createOrRetrieveACustomer } from "@/libs/supabaseAdmin";
 export async function POST(
     request: Request
 ) {
-    const { price, quantity = 1, metadata={} } = await request.json();
+    const { price } = await request.json();
     console.log("Price ID being sent to Stripe:", price.id);
     try {
         const supabase = createRouteHandlerClient({
@@ -48,7 +48,7 @@ export async function POST(
         
 
         return NextResponse.json({sessionId: session.id}); //возвращается ID созданной сессии для перенаправления
-    } catch (error: any){
+    } catch (error){
         console.log(error);
         return new NextResponse('Internal Error', { status: 500 });
     }
