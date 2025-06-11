@@ -3,19 +3,20 @@ import Header from "@/components/Header";
 import SearchInput from "@/components/SearchInput";
 
 import SearchContent from "./components/SearchContent";
+import { PageProps } from "@/.next/types/app/layout";
 
 
 
-interface SearchProps {
-    searchParam: {
+interface SearchProps extends PageProps {
+    searchParams: {
         title: string;
     }
 };
 
 export const revalidate = 0;
 
-const Search = async ({searchParam}: SearchProps) => {
-    const songs = await getSongsByTitle(searchParam.title);
+const Search = async ({searchParams}: SearchProps) => {
+    const songs = await getSongsByTitle(searchParams.title);
 
     return (
         <div
