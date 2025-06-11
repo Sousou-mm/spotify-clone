@@ -6,13 +6,15 @@ import SearchContent from "./components/SearchContent";
 
 
 
+interface SearchPageParams{
+    searchParams: {
+        title: string;
+    }
+};
+
 export const revalidate = 0;
 
-const Search = async ({
-  searchParams,
-}: {
-  searchParams: { title: string };
-}) => {
+export default async function SearchPage({ searchParams }: SearchPageParams) {
     const songs = await getSongsByTitle(searchParams.title);
 
     return (
@@ -38,5 +40,3 @@ const Search = async ({
         </div>
     )
 };
-
-export default Search;
