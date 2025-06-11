@@ -3,19 +3,20 @@ import Header from "@/components/Header";
 import SearchInput from "@/components/SearchInput";
 
 import SearchContent from "./components/SearchContent";
+import { PageProps } from "@/.next/types/app/layout";
 
 
-//ts-expect-error
-interface SearchProps{
-    searchParams: {
+interface SearchProps extends PageProps{
+    searchParams: Promise<{
         title: string;
-    }
+    }>;
 };
 
 export const revalidate = 0;
 
 const Search = async ({searchParams}: SearchProps) => {
-    const songs = await getSongsByTitle(searchParams.title);
+    const params = await searchParams;
+    const songs = await getSongsByTitle(params.title);
 
     return (
         <div
