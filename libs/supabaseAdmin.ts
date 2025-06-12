@@ -137,15 +137,17 @@ const manageSubscriptionStatusChange = async (
 
     const {id:uuid} = customerData!;
 
-    const response = await stripe.subscriptions.retrieve(subscriptionId, {
-        expand: ['default_payment_method']
-    });
 
-    const subscription = response as unknown as {
+    interface CustomSubscription extends Stripe.Subscription {
         current_period_start: number;
         current_period_end: number;
-    } & Stripe.Subscription;
-    
+    };
+
+    const response = await stripe.subscriptions.retrieve(subscriptionId, {
+        expand: ['default_payment_method', 'items.data.price']
+    });
+
+    const subscription = response as unknown as CustomSubscription;
     
     const subscriptionData: Database['public']['Tables']['subscriptions']['Insert'] ={
         id: subscription.id,
